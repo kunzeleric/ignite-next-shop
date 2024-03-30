@@ -40,7 +40,7 @@ export default function Home({ products }: HomeProps) {
               width={520}
               height={480}
               alt=""
-              src="/1.png"
+              src={product.imageUrl}
               className="object-cover"
             />
             <footer className="absolute inset-1 top-auto flex translate-y-[110%] transform items-center justify-between rounded-md bg-[rgba(0,0,0,0.6)] p-8 opacity-0 duration-200 group-hover:translate-y-[0%] group-hover:opacity-100">
