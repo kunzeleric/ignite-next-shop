@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React from 'react'
 import Stripe from 'stripe'
 
-interface ProductProps {
+export interface ProductProps {
   product: {
     id: string
     name: string
@@ -55,11 +55,11 @@ export default function Product({ product }: ProductProps) {
             {product.description}
           </p>
           <button
-            onClick={handleBuyProduct}
+            onClick={() => {}}
             disabled={isCreatingCheckoutSession}
             className="mt-auto cursor-pointer rounded-lg border-none bg-green-500 p-5 text-md font-bold text-white duration-300 hover:bg-green-300 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Comprar agora
+            Colocar na sacola
           </button>
         </div>
       </main>

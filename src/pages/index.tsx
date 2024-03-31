@@ -49,10 +49,15 @@ export default function Home({ products }: HomeProps) {
                 className="object-cover"
               />
               <footer className="absolute inset-1 top-auto flex translate-y-[110%] transform items-center justify-between rounded-md bg-[rgba(0,0,0,0.6)] p-8 opacity-0 duration-200 group-hover:translate-y-[0%] group-hover:opacity-100">
-                <strong className="text-lg text-white">{product.name}</strong>
-                <span className="text-xl font-bold text-green-300">
-                  {product.price}
-                </span>
+                <div className="flex flex-col">
+                  <strong className="text-lg text-white">{product.name}</strong>
+                  <span className="text-xl font-bold text-green-300">
+                    {product.price}
+                  </span>
+                </div>
+                <div className="cursor-pointer rounded-lg bg-green-500 p-4 text-white">
+                  <Image src="cart-product.svg" width={40} height={40} alt="" />
+                </div>
               </footer>
             </Link>
           )
