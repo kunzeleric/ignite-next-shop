@@ -5,6 +5,7 @@ import { useKeenSlider } from 'keen-slider/react'
 import { GetStaticProps } from 'next'
 import { stripe } from '@/lib/stripe'
 import Stripe from 'stripe'
+import Head from 'next/head'
 
 interface HomeProps {
   products: {
@@ -25,34 +26,39 @@ export default function Home({ products }: HomeProps) {
   })
 
   return (
-    <main
-      ref={sliderRef}
-      className="keen-slider ml-auto flex min-h-[656px] w-full max-w-[calc(100vw_-_((100vw_-_1180px)_/_2))]"
-    >
-      {products?.map((product) => {
-        return (
-          <Link
-            key={product.id}
-            href={`/product/${product.id}`}
-            className="keen-slider__slide group relative flex min-w-[32.5rem] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4] p-1"
-          >
-            <Image
-              width={520}
-              height={480}
-              alt=""
-              src={product.imageUrl}
-              className="object-cover"
-            />
-            <footer className="absolute inset-1 top-auto flex translate-y-[110%] transform items-center justify-between rounded-md bg-[rgba(0,0,0,0.6)] p-8 opacity-0 duration-200 group-hover:translate-y-[0%] group-hover:opacity-100">
-              <strong className="text-lg text-white">{product.name}</strong>
-              <span className="text-xl font-bold text-green-300">
-                {product.price}
-              </span>
-            </footer>
-          </Link>
-        )
-      })}
-    </main>
+    <>
+      <Head>
+        <title>Home | Ignite Shop</title>
+      </Head>
+      <main
+        ref={sliderRef}
+        className="keen-slider ml-auto flex min-h-[656px] w-full max-w-[calc(100vw_-_((100vw_-_1180px)_/_2))]"
+      >
+        {products?.map((product) => {
+          return (
+            <Link
+              key={product.id}
+              href={`/product/${product.id}`}
+              className="keen-slider__slide group relative flex min-w-[32.5rem] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4] p-1"
+            >
+              <Image
+                width={520}
+                height={480}
+                alt=""
+                src={product.imageUrl}
+                className="object-cover"
+              />
+              <footer className="absolute inset-1 top-auto flex translate-y-[110%] transform items-center justify-between rounded-md bg-[rgba(0,0,0,0.6)] p-8 opacity-0 duration-200 group-hover:translate-y-[0%] group-hover:opacity-100">
+                <strong className="text-lg text-white">{product.name}</strong>
+                <span className="text-xl font-bold text-green-300">
+                  {product.price}
+                </span>
+              </footer>
+            </Link>
+          )
+        })}
+      </main>
+    </>
   )
 }
 

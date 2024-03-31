@@ -1,6 +1,7 @@
 import { stripe } from '@/lib/stripe'
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
 import React from 'react'
 import Stripe from 'stripe'
@@ -36,27 +37,33 @@ export default function Product({ product }: ProductProps) {
     }
   }
   return (
-    <main className="mx-auto grid max-w-[1180px] grid-cols-2 items-stretch gap-1">
-      <div className="flex h-[calc(656px_-_0.5rem)] w-full max-w-[576px] items-center justify-center rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4]">
-        <Image src={product.imageUrl} width={520} height={520} alt="" />
-      </div>
-      <div className="flex flex-col">
-        <h1 className="text-2xl text-gray-300">{product.name}</h1>
-        <span className="mt-4 block text-2xl text-green-300">
-          {product.price}
-        </span>
-        <p className="mt-10 text-md leading-relaxed text-gray-300">
-          {product.description}
-        </p>
-        <button
-          onClick={handleBuyProduct}
-          disabled={isCreatingCheckoutSession}
-          className="mt-auto cursor-pointer rounded-lg border-none bg-green-500 p-5 text-md font-bold text-white duration-300 hover:bg-green-300 disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          Comprar agora
-        </button>
-      </div>
-    </main>
+    <>
+      <Head>
+        <title>{product.name} | Ignite Shop</title>
+      </Head>
+
+      <main className="mx-auto grid max-w-[1180px] grid-cols-2 items-stretch gap-1">
+        <div className="flex h-[calc(656px_-_0.5rem)] w-full max-w-[576px] items-center justify-center rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4]">
+          <Image src={product.imageUrl} width={520} height={520} alt="" />
+        </div>
+        <div className="flex flex-col">
+          <h1 className="text-2xl text-gray-300">{product.name}</h1>
+          <span className="mt-4 block text-2xl text-green-300">
+            {product.price}
+          </span>
+          <p className="mt-10 text-md leading-relaxed text-gray-300">
+            {product.description}
+          </p>
+          <button
+            onClick={handleBuyProduct}
+            disabled={isCreatingCheckoutSession}
+            className="mt-auto cursor-pointer rounded-lg border-none bg-green-500 p-5 text-md font-bold text-white duration-300 hover:bg-green-300 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            Comprar agora
+          </button>
+        </div>
+      </main>
+    </>
   )
 }
 
