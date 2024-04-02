@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import CartProvider from '../context/cart-context'
 
 export default function Document() {
   return (
@@ -16,8 +17,10 @@ export default function Document() {
         />
       </Head>
       <body>
-        <Main />
-        <NextScript />
+        <CartProvider>
+          <Main />
+          <NextScript />
+        </CartProvider>
       </body>
     </Html>
   )

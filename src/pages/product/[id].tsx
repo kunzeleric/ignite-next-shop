@@ -3,8 +3,9 @@ import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import React from 'react'
+import React, { useContext } from 'react'
 import Stripe from 'stripe'
+import { CartContext } from '@/context/cart-context'
 
 export interface ProductProps {
   product: {
@@ -20,6 +21,8 @@ export interface ProductProps {
 export default function Product({ product }: ProductProps) {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     React.useState(false)
+  const { addProduct } = useContext(CartContext)
+  console.log(addProduct)
 
   async function handleBuyProduct() {
     try {
@@ -55,7 +58,7 @@ export default function Product({ product }: ProductProps) {
             {product.description}
           </p>
           <button
-            onClick={() => {}}
+            onClick={() => addProduct(product)}
             disabled={isCreatingCheckoutSession}
             className="mt-auto cursor-pointer rounded-lg border-none bg-green-500 p-5 text-md font-bold text-white duration-300 hover:bg-green-300 disabled:cursor-not-allowed disabled:opacity-60"
           >

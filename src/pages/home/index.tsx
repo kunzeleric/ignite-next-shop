@@ -6,6 +6,8 @@ import { GetStaticProps } from 'next'
 import { stripe } from '@/lib/stripe'
 import Stripe from 'stripe'
 import Head from 'next/head'
+import { useContext } from 'react'
+import { CartContext } from '../../context/cart-context'
 
 interface HomeProps {
   products: {
