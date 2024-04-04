@@ -17,10 +17,8 @@ export default function Document() {
         />
       </Head>
       <body>
-        <CartProvider>
-          <Main />
-          <NextScript />
-        </CartProvider>
+        <Main />
+        <NextScript />
       </body>
     </Html>
   )
