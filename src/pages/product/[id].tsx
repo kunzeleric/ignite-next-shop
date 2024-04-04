@@ -21,9 +21,7 @@ export interface ProductProps {
 export default function Product({ product }: ProductProps) {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     React.useState(false)
-  const { addProduct } = useContext(CartContext)
-  console.log(addProduct)
-
+  const { addProductToCart } = useContext(CartContext)
   async function handleBuyProduct() {
     try {
       setIsCreatingCheckoutSession(true)
@@ -58,7 +56,7 @@ export default function Product({ product }: ProductProps) {
             {product.description}
           </p>
           <button
-            onClick={() => addProduct(product)}
+            onClick={() => addProductToCart({ ...product, quantity: 1 })}
             disabled={isCreatingCheckoutSession}
             className="mt-auto cursor-pointer rounded-lg border-none bg-green-500 p-5 text-md font-bold text-white duration-300 hover:bg-green-300 disabled:cursor-not-allowed disabled:opacity-60"
           >

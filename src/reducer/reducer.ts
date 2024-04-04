@@ -6,6 +6,7 @@ export interface Product {
   name: string
   imageUrl: string
   price: string
+  quantity: number
 }
 
 export interface ProductState {
@@ -26,6 +27,16 @@ export function productReducer(state: ProductState, action: any) {
         products: [
           ...state.products.filter((product) => product.id !== action.payload),
         ],
+      }
+
+    case ActionTypes.UPDATE_QUANTITY:
+      return {
+        ...state,
+        products: state.products.map((product) =>
+          product.id === action.payload
+            ? { ...product, quantity: product.quantity + 1 }
+            : product,
+        ),
       }
 
     default:

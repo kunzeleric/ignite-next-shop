@@ -1,12 +1,17 @@
+import { CartContext, CartContextData } from '@/context/cart-context'
 import { X } from 'lucide-react'
 import Image from 'next/image'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useContext } from 'react'
 
 interface SidebarProps {
   setIsSidebarOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export function SideBar({ setIsSidebarOpen }: SidebarProps) {
+  const { products, removeProductFromCart } = useContext(
+    CartContext,
+  ) as CartContextData
+
   return (
     <aside className="absolute right-0 z-10 h-screen min-w-[480px] bg-gray-800 px-10 py-8">
       <X
@@ -20,48 +25,32 @@ export function SideBar({ setIsSidebarOpen }: SidebarProps) {
           <h1 className="text-xl font-medium text-gray-200">
             Sacola de compras
           </h1>
-          <div className="flex items-center gap-6">
-            <div className="rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4]">
-              <Image src="/1.png" width={100} height={100} alt="" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-base text-gray-100">
-                Camiseta Beyond the Limits
-              </p>
-              <strong className="text-lg text-gray-100">R$ 79,90</strong>
-              <span className="cursor-pointer text-base font-medium text-green-500 hover:text-green-300">
-                Remover
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-6">
-            <div className="rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4]">
-              <Image src="/2.png" width={100} height={100} alt="" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-base text-gray-100">
-                Camiseta Beyond the Limits
-              </p>
-              <strong className="text-lg text-gray-100">R$ 79,90</strong>
-              <span className="cursor-pointer text-base font-medium text-green-500 hover:text-green-300">
-                Remover
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-6">
-            <div className="rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4]">
-              <Image src="/3.png" width={100} height={100} alt="" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-base text-gray-100">
-                Camiseta Beyond the Limits
-              </p>
-              <strong className="text-lg text-gray-100">R$ 79,90</strong>
-              <span className="cursor-pointer text-base font-medium text-green-500 hover:text-green-300">
-                Remover
-              </span>
-            </div>
-          </div>
+          {products.map((product) => {
+            return (
+              <div key={product.id} className="flex items-center gap-6">
+                <div className="rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4]">
+                  <Image
+                    src={product.imageUrl}
+                    width={100}
+                    height={100}
+                    alt=""
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-base text-gray-100">{product.name}</p>
+                  <strong className="text-lg text-gray-100">
+                    {product.price}
+                  </strong>
+                  <span
+                    onClick={() => removeProductFromCart(product.id)}
+                    className="cursor-pointer text-base font-medium text-green-500 hover:text-green-300"
+                  >
+                    Remover
+                  </span>
+                </div>
+              </div>
+            )
+          })}
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
