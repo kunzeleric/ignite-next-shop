@@ -17,6 +17,7 @@ export interface ProductProps {
 export interface CartContextData {
   products: ProductProps[]
   totalItems: number
+  totalAmountToPay: number
   addProductToCart: (products: ProductProps) => void
   updateQuantity?: (productId: string) => void
   removeProductFromCart: (productId: string) => void
@@ -35,14 +36,13 @@ const CartProvider = ({ children }: CartContextProviderProps) => {
 
   const { products } = productsState
 
-  console.log(products)
-
   function updateQuantity(productId: string) {
     dispatch(updateProductQuantity(productId))
   }
 
   function addProductToCart(product: ProductProps) {
     console.log('Adding product to cart....')
+    console.log('Product info = ', product)
     if (productsState.products.find((item) => item.id === product.id)) {
       updateQuantity(product.id)
     } else {
@@ -55,11 +55,30 @@ const CartProvider = ({ children }: CartContextProviderProps) => {
     dispatch(removeProduct(productId))
   }
 
-  const totalItems = products?.reduce((product) => product.quantity, 0)
+  console.log(products)
+
+  const totalItems = products?.reduce(
+    (acc, product) => acc + product.quantity,
+    0,
+  )
+  const totalAmountToPay = products
+    ?.map((product) => {
+      const productPrice = Number(
+        product.price.substring(3, product.price.length).replace(',', '.'),
+      )
+      return productPrice * product.quantity
+    })
+    .reduce((acc, item) => acc + item, 0)
 
   return (
     <CartContext.Provider
-      value={{ totalItems, addProductToCart, products, removeProductFromCart }}
+      value={{
+        totalItems,
+        totalAmountToPay,
+        addProductToCart,
+        products,
+        removeProductFromCart,
+      }}
     >
       {children}
     </CartContext.Provider>

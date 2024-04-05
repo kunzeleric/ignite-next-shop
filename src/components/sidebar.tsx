@@ -8,9 +8,8 @@ interface SidebarProps {
 }
 
 export function SideBar({ setIsSidebarOpen }: SidebarProps) {
-  const { products, removeProductFromCart } = useContext(
-    CartContext,
-  ) as CartContextData
+  const { products, totalItems, totalAmountToPay, removeProductFromCart } =
+    useContext(CartContext) as CartContextData
 
   return (
     <aside className="absolute right-0 z-10 h-screen min-w-[480px] bg-gray-800 px-10 py-8">
@@ -28,13 +27,18 @@ export function SideBar({ setIsSidebarOpen }: SidebarProps) {
           {products.map((product) => {
             return (
               <div key={product.id} className="flex items-center gap-6">
-                <div className="rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4]">
+                <div className="relative rounded-lg bg-gradient-to-r from-[#1ea483] to-[#7465d4]">
                   <Image
                     src={product.imageUrl}
                     width={100}
                     height={100}
                     alt=""
                   />
+                  {product.quantity > 1 ? (
+                    <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-green-500 text-base font-bold text-white">
+                      {product.quantity}
+                    </span>
+                  ) : null}
                 </div>
                 <div className="flex flex-col gap-2">
                   <p className="text-base text-gray-100">{product.name}</p>
@@ -56,12 +60,12 @@ export function SideBar({ setIsSidebarOpen }: SidebarProps) {
           <div className="flex flex-col gap-2">
             <div className="flex justify-between">
               <p className="text-sm text-gray-100">Quantidade</p>
-              <span className="text-sm text-gray-100">3 itens</span>
+              <span className="text-sm text-gray-100">{totalItems} itens</span>
             </div>
             <div className="flex justify-between">
               <p className="text-base font-bold text-gray-100">Valor total</p>
               <span className="text-base font-bold text-gray-100">
-                R$ 270,00
+                R$ {totalAmountToPay}
               </span>
             </div>
           </div>
