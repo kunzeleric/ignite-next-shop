@@ -14,29 +14,12 @@ export interface ProductProps {
     imageUrl: string
     price: string
     description: string
-    defaultPriceId: string
+    priceId: string
   }
 }
 
 export default function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
-    React.useState(false)
   const { addProductToCart } = useContext(CartContext)
-  async function handleBuyProduct() {
-    try {
-      setIsCreatingCheckoutSession(true)
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      })
-
-      const { checkoutUrl } = response.data
-      window.location.href = checkoutUrl
-    } catch (error) {
-      // TODO: conectar a uma ferramenta de observabilidade (datadog \ sentry)
-      setIsCreatingCheckoutSession(false)
-      alert('Falha ao redirecionar ao checkout!')
-    }
-  }
   return (
     <>
       <Head>
@@ -57,7 +40,6 @@ export default function Product({ product }: ProductProps) {
           </p>
           <button
             onClick={() => addProductToCart({ ...product, quantity: 1 })}
-            disabled={isCreatingCheckoutSession}
             className="mt-auto cursor-pointer rounded-lg border-none bg-green-500 p-5 text-md font-bold text-white duration-300 hover:bg-green-300 disabled:cursor-not-allowed disabled:opacity-60"
           >
             Colocar na sacola
@@ -98,7 +80,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
           currency: 'BRL',
         }).format(price.unit_amount! / 100),
         description: product.description,
-        defaultPriceId: price.id,
+        priceId: price.id,
       },
     },
     revalidate: 60 * 60 * 1, // 1 hour

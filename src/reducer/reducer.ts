@@ -1,4 +1,3 @@
-import { ProductProps } from '@/pages/product/[id]'
 import { ActionTypes } from './actions'
 
 export interface Product {
@@ -7,6 +6,7 @@ export interface Product {
   imageUrl: string
   price: string
   quantity: number
+  priceId: string
 }
 
 export interface ProductState {

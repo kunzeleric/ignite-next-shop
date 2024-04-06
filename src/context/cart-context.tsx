@@ -12,6 +12,7 @@ export interface ProductProps {
   imageUrl: string
   price: string
   quantity: number
+  priceId: string
 }
 
 export interface CartContextData {
