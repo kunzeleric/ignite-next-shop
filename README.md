@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ignite Shop
+Project based on Rocketseat's Ignite studying program.
+The goal is to make an app simulate a clothing store, and link it to Stripe so it can look like it's a real store.
+You can add as many shirts in your cart and go into the checkout in the Stripe page.
 
-## Getting Started
+## Technologies
 
-First, run the development server:
+- React
+- TailwindCSS
+- Axios
+- Stripe API
+- Lucide Icons
+- Keen Slider
+
+## Main Goals
+
+- Practice useContext and useReducer hooks.
+- Improve Next.js overall knowledge, with concepts of Static pages and Server Side Rendering.
+- Create and link products to the Stripe interface through its API.
+
+## Setup
+
+1. After cloning or downloading the project, use the commands below in the terminal.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  cd my-project
+  npm install my-project
+  npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Create an account and register products in Stripe website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configure your environment variables (.env.local) according to your stripe account.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+NEXT_URL=http://localhost:3000
+NEXT_PUBLIC_STRIPE_PUBLIC_KEY=
+NEXT_PUBLIC_STRIPE_SECRET_KEY=
+```
 
-## Learn More
+## Author
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [@kunzeleric](https://www.github.com/kunzeleric)
